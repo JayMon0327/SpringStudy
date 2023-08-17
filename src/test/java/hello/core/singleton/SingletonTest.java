@@ -43,7 +43,6 @@ public class SingletonTest {
     @Test
     @DisplayName("스프링 컨테이너와 싱글톤")
     void springContainer() {
-//        AppConfig appconfig = new AppConfig();
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         //1. 조회: 호출할 때 마다 객체를 생성
         MemberService memberService1 = ac.getBean("memberService", MemberService.class);
