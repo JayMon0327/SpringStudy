@@ -1,5 +1,5 @@
 # 🌱 김영한의 스프링 완전 정복 시리즈.
-  ## [📚 Study Note](https://jaymon.notion.site/96d0b84674ce4bed8244263be3d947f6?pvs=4)
+  ## [📚 Study Note - 스프링](https://jaymon.notion.site/96d0b84674ce4bed8244263be3d947f6?pvs=4)
      
 - ### 🌱 Spring Introduction - 코드로 배우는 스프링부트, 웹 MVC, DB 접근기술 
   <details> 
