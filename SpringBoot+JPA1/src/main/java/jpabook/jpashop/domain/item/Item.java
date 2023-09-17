@@ -1,6 +1,7 @@
 package jpabook.jpashop.domain.item;
 
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import static javax.persistence.FetchType.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue
@@ -28,11 +29,31 @@ public class Item {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<Category>();
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "parent_id")
-    private Category parent;
+//    @ManyToOne(fetch = LAZY)
+//    @JoinColumn(name = "parent_id")
+//    private Category parent;
+//
+//    @OneToMany(mappedBy = "parent")
+//    private List<Category> child = new ArrayList<>();
 
-    @OneToMany(mappedBy = "parent")
-    private List<Category> child = new ArrayList<>();
+    //비즈니스 로직//
+
+    /**
+     * stock 증가 (재고증가)
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock 감소
+     */
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 
 }
