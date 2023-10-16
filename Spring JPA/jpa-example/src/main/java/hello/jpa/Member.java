@@ -1,10 +1,14 @@
 package hello.jpa;
 
+import net.bytebuddy.asm.Advice;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue
@@ -24,6 +28,8 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
+
 
     public Member() {
     }
