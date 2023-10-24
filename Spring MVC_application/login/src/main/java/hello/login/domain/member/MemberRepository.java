@@ -24,13 +24,6 @@ public class MemberRepository {
     }
 
     public Optional<Member> findByLoginId(String loginId) {
-//        List<Member> all = findAll(); 아래 람다식으로 표현한 것과 똑같음
-//        for (Member m : all) {
-//            if (m.getLoginId().equals(loginId)) {
-//                return Optional.ofNullable(m);
-//            }
-//        }
-//        return Optional.empty();
         return findAll().stream()
                 .filter(m -> m.getLoginId().equals(loginId))
                 .findFirst();

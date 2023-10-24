@@ -24,7 +24,7 @@ public class LoginController {
         return "login/loginForm";
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
