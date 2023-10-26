@@ -30,6 +30,5 @@ public class HelloController {
         System.out.println("ipPort IP= " + ipPort.getIp());
         System.out.println("ipPort Port= " + ipPort.getPort());
         return "ok";
-
     }
 }
