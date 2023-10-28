@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class UncheckedTest {
 
     @Test
-    void unckecked_catch() {
+    void unchecked_catch() {
         Service service = new Service();
         service.callCatch();
     }
