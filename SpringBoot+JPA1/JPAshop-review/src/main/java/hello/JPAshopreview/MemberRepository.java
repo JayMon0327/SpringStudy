@@ -1,5 +1,6 @@
 package hello.JPAshopreview;
 
+import hello.JPAshopreview.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,4 @@
-package hello.JPAshopreview;
-
+package hello.JPAshopreview.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Setter @Getter
 public class Member {
 
     @Id @GeneratedValue
@@ -18,9 +17,11 @@ public class Member {
 
     private String name;
 
-//    @Embedded
-//    private Address address;
-//
-//    @OneToMany(mappedBy = "member")
-//    private List<Order> order = new ArrayList<>();
+    @Embedded
+    private Address address;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
+
+
 }
