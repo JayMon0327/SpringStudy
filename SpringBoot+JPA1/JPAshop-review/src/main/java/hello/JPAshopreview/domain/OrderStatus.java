@@ -1,5 +1,5 @@
 package hello.JPAshopreview.domain;
 
 public enum OrderStatus {
-        OPEN, CANCEL
+        ORDER, CANCEL
 }
