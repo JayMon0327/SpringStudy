@@ -1,6 +1,8 @@
 package hello.JPAshopreview.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.context.annotation.EnableMBeanExport;
 
@@ -14,6 +16,7 @@ import static javax.persistence.FetchType.*;
 @Entity
 @Table(name = "orders")
 @Setter @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id @GeneratedValue
@@ -75,7 +78,7 @@ public class Order {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
         this.setStatus(OrderStatus.CANCEL);
-        for (OrderItem orderItem: orderItems) {
+        for (OrderItem orderItem : orderItems) {
             orderItem.cancel();
         }
     }

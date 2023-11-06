@@ -24,7 +24,7 @@ public class ItemService {
     @Transactional
     public void updateItem(Long Id, ItemUpdateDTO dto) {
         Item item = itemRepository.findOne(Id);
-        item.change(dto);
+        item.change(dto.getName(),dto.getPrice(),dto.getStockQuantity());
     }
 
     public Item findOne(Long itemId) {

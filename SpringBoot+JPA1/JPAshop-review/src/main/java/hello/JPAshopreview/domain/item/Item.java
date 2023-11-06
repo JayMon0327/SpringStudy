@@ -53,10 +53,10 @@ public abstract class Item {
     /**
      * 상품 수정
      */
-    public void change(ItemUpdateDTO dto) {
-        this.name = dto.getName();
-        this.price = dto.getPrice();
-        this.stockQuantity = dto.getStockQuantity();
+    public void change(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
     }
 
 
