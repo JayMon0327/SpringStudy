@@ -2,6 +2,7 @@ package hello.JPAshopreview.domain.item;
 
 import hello.JPAshopreview.domain.Category;
 import hello.JPAshopreview.exception.NotEnoughStockException;
+import hello.JPAshopreview.service.ItemUpdateDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,6 +48,15 @@ public abstract class Item {
             throw new NotEnoughStockException("need more stock");
         }
         this.stockQuantity = result;
+    }
+
+    /**
+     * 상품 수정
+     */
+    public void change(ItemUpdateDTO dto) {
+        this.name = dto.getName();
+        this.price = dto.getPrice();
+        this.stockQuantity = dto.getStockQuantity();
     }
 
 

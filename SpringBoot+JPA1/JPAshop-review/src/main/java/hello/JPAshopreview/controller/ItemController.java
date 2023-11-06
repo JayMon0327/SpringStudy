@@ -3,6 +3,7 @@ package hello.JPAshopreview.controller;
 import hello.JPAshopreview.domain.item.Book;
 import hello.JPAshopreview.domain.item.Item;
 import hello.JPAshopreview.service.ItemService;
+import hello.JPAshopreview.service.ItemUpdateDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -70,15 +71,12 @@ public class ItemController {
 
     @PostMapping("items/{itemId}/edit")
     public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
 
-        itemService.saveItem(book);
+        ItemUpdateDTO dto = new ItemUpdateDTO();
+        dto.setName(form.getName());
+        dto.setPrice(form.getPrice());
+        dto.setStockQuantity(form.getStockQuantity());
+        itemService.updateItem(itemId,dto);
         return "redirect:/items";
     }
 }
