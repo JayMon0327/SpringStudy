@@ -1,6 +1,6 @@
-package hello.domain.item;
+package hello.JPAshopreview.domain.item;
 
-import hello.domain.Category;
+import hello.JPAshopreview.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 

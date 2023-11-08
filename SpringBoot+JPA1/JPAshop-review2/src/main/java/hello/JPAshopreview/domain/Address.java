@@ -1,4 +1,4 @@
-package hello.domain;
+package hello.JPAshopreview.domain;
 
 import lombok.Getter;
 import lombok.Setter;
