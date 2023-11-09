@@ -23,6 +23,7 @@ public class Member {
     @Embedded
     private Address address;
 
+    @JsonIgnore //dto 객체로 반환하면 설정할 필요없음. 엔티티를 반환하는 경우에 양방향 무한루프 방지용
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
