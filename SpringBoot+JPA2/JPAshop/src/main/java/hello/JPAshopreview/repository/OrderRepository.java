@@ -2,6 +2,7 @@ package hello.JPAshopreview.repository;
 
 import hello.JPAshopreview.domain.Member;
 import hello.JPAshopreview.domain.Order;
+import hello.JPAshopreview.domain.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -100,4 +101,13 @@ public class OrderRepository {
     }
 
 
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
 }
