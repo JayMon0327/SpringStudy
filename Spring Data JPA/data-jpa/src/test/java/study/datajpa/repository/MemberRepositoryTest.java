@@ -227,7 +227,7 @@ class MemberRepositoryTest {
         em.flush();
         em.clear();
 
-        //when N+1
+        //when N+1 -> fetch join과 엔티티 그래프로 해결
         //select Member 1
         List<Member> result = memberRepository.findAll();
         for (Member member : result) {
@@ -236,6 +236,32 @@ class MemberRepositoryTest {
             System.out.println("member.getTeam = " + member.getTeam().getName());
         }
 
+    }
+
+    @Test
+    public void queryHint() {
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when
+        Member findMember = memberRepository.findReadOnlyByUsername("member1");
+        findMember.setUsername("member2");
+
+        em.flush();
+
+    }
+
+    @Test
+    public void lock() {
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when
+        List<Member> member11 = memberRepository.findLockByUsername("member1");
     }
 
 }

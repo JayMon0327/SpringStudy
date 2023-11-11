@@ -2,14 +2,13 @@ package study.datajpa.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import study.datajpa.dto.MemberDto;
 import study.datajpa.entity.Member;
 
+import javax.persistence.LockModeType;
+import javax.persistence.QueryHint;
 import javax.swing.text.html.Option;
 import java.util.Collection;
 import java.util.List;
@@ -66,6 +65,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findEntityGraphByUsername(@Param("username") String username);
     //엔티티 그래프 종료
 
+    // 쿼리힌트 - 리드온리옵션을 이용한 성능최적화 but 일일이 넣는다고 해서 그렇게 성능향상이 있짆않다. 주요 API에 적용시킬것
+    @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
+    Member findReadOnlyByUsername(String username);
+
+    //락
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    List<Member> findLockByUsername(String username);
 
 
 }
