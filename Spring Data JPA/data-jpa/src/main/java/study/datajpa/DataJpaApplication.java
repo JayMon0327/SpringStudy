@@ -9,5 +9,4 @@ public class DataJpaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DataJpaApplication.class, args);
 	}
-
 }
