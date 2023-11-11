@@ -13,6 +13,7 @@ import study.datajpa.dto.MemberDto;
 import study.datajpa.entity.Member;
 import study.datajpa.entity.Team;
 
+import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
     @Autowired TeamRepository teamRepository;
+    @Autowired EntityManager em;
 
     @Test
     public void testMember() {
@@ -184,6 +186,26 @@ class MemberRepositoryTest {
         assertThat(page.getTotalPages()).isEqualTo(2);
         assertThat(page.isFirst()).isTrue();
         assertThat(page.hasNext()).isTrue();
+
+    }
+
+    @Test
+    public void bulkUpdate() {
+        memberRepository.save(new Member("member1", 10));
+        memberRepository.save(new Member("member2", 19));
+        memberRepository.save(new Member("member3", 20));
+        memberRepository.save(new Member("member4", 21));
+        memberRepository.save(new Member("member5", 40));
+
+        int resultCount = memberRepository.bulkAgePlus(20);
+        //벌크 연산은 영속성 컨텍스트를 거치지 않고 DB로 가기 때문에 커밋 전에 조회할때는 꼭 컨텍스트 클리어를 해줘야함
+        // 하지만 @Modifying에 clear옵션을 주면 하지 않아도 됨.
+//        em.flush();
+//        em.clear();
+
+        Member result = memberRepository.findMemberByUsername("member5");
+        System.out.println("result = " + result);
+        assertThat(resultCount).isEqualTo(3);
 
     }
 
