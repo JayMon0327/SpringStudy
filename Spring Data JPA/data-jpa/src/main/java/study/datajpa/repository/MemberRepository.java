@@ -2,6 +2,7 @@ package study.datajpa.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -44,7 +45,27 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     //페이징 처리 끝
 
+    //벌크 쿼리
     @Modifying(clearAutomatically = true)
     @Query("update Member m set m.age = m.age + 1 where m.age >= :age")
     int bulkAgePlus(@Param("age") int age);
+
+    //엔티티 그래프 시작
+    //엔티티 그래프 == join fetch
+    @Override
+    @EntityGraph(attributePaths = {"team"})
+    List<Member> findAll();
+
+    //엔티티 그래프 사용하면서 쿼리문도 함께 조회가능
+    @EntityGraph(attributePaths = {"team"})
+    @Query("select m from Member m")
+    List<Member> findMemberEntityGraph();
+
+    //엔티티 그래프 사용하면서 메소드 이름 쿼리도 적용가능
+    @EntityGraph(attributePaths = {"team"})
+    List<Member> findEntityGraphByUsername(@Param("username") String username);
+    //엔티티 그래프 종료
+
+
+
 }
