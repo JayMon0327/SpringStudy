@@ -1,5 +1,7 @@
 package study.datajpa.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +33,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findMemberByUsername(String username); //단건
     Optional<Member> findOptionalByUsername(String username); //단건 Optional
 
+    //페이징 처리 시작
+//    Page<Member> findByAge(int age, Pageable pageable); // 기본 페이징 처리(모바일의 경우 반환 타입 Slice 사용가능)
+
+    // 카운트 쿼리가 join이 많아지면 성능이 낮아질 수 있다. 카운트 쿼리 분리
+    @Query(value = "select m from Member m left join m.team t",
+            countQuery = "select count(m) from Member m")
+    Page<Member> findByAge(int age, Pageable pageable);
+
+    //페이징 처리 끝
 }
