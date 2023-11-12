@@ -12,6 +12,11 @@ spring:
       hibernate:
         #       show_sql: true // 시스템 콘솔로 찍으니 아래 SQL debug모드를 쓰자.
         format_sql: true
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 2000
 logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace #쿼리로그 파라미터 ?를 구체적으로 표시, build.gradle에 라이브러리 추가/스프링 부트 2.x, hibernate5
